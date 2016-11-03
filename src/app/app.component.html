@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div *ngIf="!requestFired" class="col-sm-4 offset-sm-6 ">
+      <button type="button" (click)="makeRequest()">Make Request</button>
+      <pre>{{data | json}}</pre>
+    </div>
+
+  <div class="row">
+    <app-form-component class="col-sm-4 offset-sm-6 "></app-form-component>
+  </div>
+    </div>
+    <ngb-tabset>
+      <ngb-tab *ngFor="let outfit of outfits" [title]="outfit.name">
+        <template ngbTabContent>
+          <app-outfit-container [outfit]="outfit"></app-outfit-container>
+        </template>
+      </ngb-tab>
+
+    </ngb-tabset>
+  </div>
+
