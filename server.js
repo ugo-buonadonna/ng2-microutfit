@@ -2,28 +2,106 @@
  * Created by ugo on 03/11/16.
  */
 
-let seneca = require('seneca')();
+/*
+ let seneca = require('seneca')();
 
-seneca
-    .use('./app/main')
-    .listen()
-    .client()
+ seneca
+ .use('./app/main')
+ .listen()
+ .client()
 
-    .ready( () => {
-        seneca.act('role:math, cmd:sum', {left: 1, right: 3}, (err,reply) => console.log(reply))
+ .ready( () => {
+ seneca.act('role:math, cmd:sum', {left: 1, right: 3}, (err,reply) => console.log(reply))
+ });
+
+ */
+
+/*
+ "use strict";
+
+
+ // use the http://expressjs.com web framework
+ const express        = require('express');
+ const bodyParser     = require('body-parser');
+ const cookieParser   = require('cookie-parser');
+ const methodOverride = require('method-override');
+
+
+ // setup the configuration
+ const conf = {
+ port:  3000
+ };
+
+
+ // create a seneca instance
+ const seneca  = require('seneca')();
+
+ // use the example plugins
+ // they are all sub folders
+ seneca.use('./app/main');
+
+
+
+
+ // set up express
+ const app = express();
+ app.use(cookieParser());
+ app.use(express.query());
+ app.use(bodyParser.urlencoded({extended: true}))
+ app.use(methodOverride());
+ app.use(bodyParser.json());
+
+ // this is the top level static content
+ app.use(express.static(__dirname + '/public'));
+
+ // add in the seneca middleware
+ // this is how the seneca plugins can respond to HTTP requests
+ app.use( require('seneca-web') );
+
+
+ // start the app!
+ app.listen(conf.port);
+
+
+
+ */
+
+'use strict';
+
+var Seneca = require('seneca');
+var Web = require('seneca-web');
+var Express = require('express');
+var CookieParser = require('cookie-parser');
+var BodyParser = require('body-parser');
+
+var Plugin = require('./app/main');
+const Routes = require('./app/routes');
+
+// Prep express
+var app = Express();
+
+app.use(CookieParser());
+app.use(BodyParser.urlencoded({extended: true}));
+
+// The config we will pass to seneca-web
+var config = {
+    adapter: require('seneca-web-adapter-express'),
+    context: app,
+    routes: Routes
+};
+
+// Server and start as usual.
+
+var seneca = Seneca()
+    .use(Plugin)
+    .use(Web, config)
+    .ready(() => {
+        var server = seneca.export('web/context')();
+
+        server.listen('4000', (err) => {
+            console.log(err || 'server started on: 4000')
+        })
     });
-
-
-
-
-
-
-
-
-
-
-
-
 /* var fs = require('fs')
  var spawn = require('child_process').spawn
 

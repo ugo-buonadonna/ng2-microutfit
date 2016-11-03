@@ -6,7 +6,7 @@
 
 
 // var plugin = function name1( options )
-let plugin = function plugin1(options) {
+let plugin1 = function plugin1(options) {
 
 
     // Default options
@@ -25,4 +25,13 @@ let plugin = function plugin1(options) {
 
      //return 'pluginName';
  }
- module.exports = plugin;
+
+ let plugin = function () {
+     var seneca = this;
+
+     seneca.add('role:api,cmd:getData', (msg, done) => {
+         done(null, {ok: true, message: 'Data you got'})
+     })
+
+ }
+module.exports = plugin;
