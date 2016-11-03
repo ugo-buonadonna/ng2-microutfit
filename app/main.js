@@ -3,14 +3,26 @@
  */
 "use strict";
 
-let seneca = require("seneca")();
 
-seneca.add({cmd: "sum", role: "math"}, (msg, respond) => {
-    let sum = msg.left + msg.right;
-    respond(null, {answer: sum});
-});
 
-seneca.act({cmd: "sum", left: 1, right: 2, role: "math" }, (err: Error, result: number) => {
-    if (err) { return console.error(err); }
-    console.log(result);
-});
+// var plugin = function name1( options )
+let plugin = function plugin1(options) {
+
+
+    // Default options
+    options = this.util.deepextend({
+        color: 'red',
+        box: {
+            width:  100,
+            height: 200
+        }
+    },options);
+
+    this.add({cmd: "sum", role: "math"}, (msg, respond) => {
+         let sum = msg.left + msg.right;
+         respond(null, {answer: sum});
+     });
+
+     //return 'pluginName';
+ }
+ module.exports = plugin;
