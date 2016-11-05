@@ -65,7 +65,7 @@
 
 
  */
-
+/*
 'use strict';
 
 var Seneca = require('seneca');
@@ -101,25 +101,30 @@ var seneca = Seneca()
         server.listen('4000', (err) => {
             console.log(err || 'server started on: 4000')
         })
-    });
-/* var fs = require('fs')
- var spawn = require('child_process').spawn
+    });*/
 
 
- var services = ['web-app','user-details','offer-service']
+ const fs = require('fs');
+ const spawn = require('child_process').spawn;
 
- services.forEach(function(service){
- var log  = fs.createWriteStream('./log/'+service+'.log')
- var proc = spawn('node', ['./services/'+service+'.js','--seneca.log.all'])
 
- proc.stdout.pipe(log)
- proc.stderr.pipe(log)
+ const services = ['restricted-res'];
 
- proc.stdout.pipe(process.stdout)
- proc.stderr.pipe(process.stderr)
- })
 
- */
+ services.map((service) => {
+ const log  = fs.createWriteStream('./logs/'+service+'.log');
+ const proc = spawn('node', ['./'+service+'/'+service+'.js']);
+
+     log.on('open', _ => {
+         proc.stdout.pipe(log);
+         proc.stderr.pipe(log);
+
+         proc.stdout.pipe(process.stdout);
+         proc.stderr.pipe(process.stderr);
+     })
+ });
+
+
 
 
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Http, Response, Jsonp, RequestOptionsArgs, Headers, Request} from '@angular/http';
 import { Outfit } from './outfit-model/outfit.model';
 import { OnInit } from '@angular/core';
-import { BoardService} from './app.service'
+import { BoardService} from './board-service/board.service'
 let XML2json = require('./xml2json.min.js');
 
 

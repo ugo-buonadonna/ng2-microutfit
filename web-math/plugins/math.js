@@ -6,7 +6,7 @@
 
 
 // var plugin = function name1( options )
-let plugin1 = function plugin1(options) {
+let math_plugin = function math(options) {
 
 
     // Default options
@@ -19,19 +19,16 @@ let plugin1 = function plugin1(options) {
     },options);
 
     this.add({cmd: "sum", role: "math"}, (msg, respond) => {
-         let sum = msg.left + msg.right;
-         respond(null, {answer: sum});
+        let left = Number(msg.args.body.left);
+        let right = Number(msg.args.body.right);
+
+        if(isNaN(left) || isNaN(right))
+            respond(null, {status: 'err',answer: 'invalid numbers provided'});
+         else
+         respond(null, {status: 'ok',answer: left+right});
      });
 
      //return 'pluginName';
  }
 
- let plugin = function () {
-     var seneca = this;
-
-     seneca.add('role:api,cmd:getData', (msg, done) => {
-         done(null, {ok: true, message: 'Data you got'})
-     })
-
- }
-module.exports = plugin;
+module.exports = math_plugin;

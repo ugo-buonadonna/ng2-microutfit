@@ -1,7 +1,7 @@
 import {Injectable}     from '@angular/core';
 import {Http, Response, RequestOptions, Headers} from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
-import {Outfit}         from './outfit-model/outfit.model'
+import {Outfit}         from '../outfit-model/outfit.model'
 
 @Injectable()
 export class BoardService {
