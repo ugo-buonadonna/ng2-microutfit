@@ -8,11 +8,11 @@
     "lint": "tslint \"src/**/*.ts\"",
     "test": "npm run lint && npm run mocha",
     "mocha": "mocha ./test/backend/*-test.js",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec ./test/backend/*-test.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha ./test/backend/*-test.js --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor"
-  },
+  },package.
   "private": true,
   "dependencies": {
     "@angular/common": "~2.1.0",

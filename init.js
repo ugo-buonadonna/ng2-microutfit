@@ -104,6 +104,7 @@ var seneca = Seneca()
     });*/
 
 
+'use strict';
  const fs = require('fs');
  const spawn = require('child_process').spawn;
 
@@ -124,8 +125,7 @@ var seneca = Seneca()
      })
  });
 
-
-
+module.exports = (x,y) => x+y;
 
 
 
