@@ -1,5 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/ugo-buonadonna/ng2-microutfit/badge.svg?branch=master)](https://coveralls.io/github/ugo-buonadonna/ng2-microutfit?branch=master)
-
+[![Coverage Status](https://coveralls.io/repos/github/ugo-buonadonna/ng2-microutfit/badge.svg?branch=master)](https://coveralls.io/github/ugo-buonadonna/ng2-microutfit?branch=master) [![Build Status](https://travis-ci.org/ugo-buonadonna/ng2-microutfit.svg?branch=master)](https://travis-ci.org/ugo-buonadonna/ng2-microutfit)
 # Angular2Forms
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.18.

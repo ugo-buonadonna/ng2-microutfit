@@ -4,7 +4,7 @@
 
 /* eslint-env node,mocha */
 var should = require('should');
-var main = require('../../init')
+var main = require('../../init.js');
 
 describe('Dummy testing', function() {
     describe('Obvious assertion', function () {
