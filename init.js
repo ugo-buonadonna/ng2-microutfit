@@ -112,7 +112,7 @@ var seneca = Seneca()
  const services = ['restricted-res'];
 
 
- services.map((service) => {
+ /*services.map((service) => {
  const log  = fs.createWriteStream('./logs/'+service+'.log');
  const proc = spawn('node', ['./'+service+'/'+service+'.js']);
 
@@ -123,7 +123,7 @@ var seneca = Seneca()
          proc.stdout.pipe(process.stdout);
          proc.stderr.pipe(process.stderr);
      })
- });
+ });*/
 
 module.exports = (x,y) => x+y;
 
