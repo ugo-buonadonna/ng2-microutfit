@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {Http, Response, Jsonp, RequestOptionsArgs, Headers, Request} from '@angular/http';
+import {Http} from '@angular/http';
 import { Outfit } from './outfit-model/outfit.model';
 import { OnInit } from '@angular/core';
-import { BoardService} from './board-service/board.service'
+import { BoardService} from './board-service/board.service';
 let XML2json = require('./xml2json.min.js');
 
 
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   board: any;
   requestFired: boolean;
 
-  constructor(public http: Http, private jsonp: Jsonp, private boardService: BoardService) {
+  constructor(public http: Http, private boardService: BoardService) {
     this.requestFired = false;
   this.x2js = new XML2json();
   };

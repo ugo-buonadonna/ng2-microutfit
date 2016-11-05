@@ -10,7 +10,7 @@ import { BodyRendererComponent } from './body-renderer/body-renderer.component';
 import { ClotheItemRendererComponent } from './clothe-item-renderer/clothe-item-renderer.component';
 import { ClotheDetailComponent } from './clothe-detail/clothe-detail.component';
 import { OutfitContainerComponent } from './outfit-container/outfit-container.component';
-import {BoardService} from "./board-service/board.service";
+import {BoardService} from './board-service/board.service';
 import { FormComponentComponent } from './form-component/form-component.component';
 
 
