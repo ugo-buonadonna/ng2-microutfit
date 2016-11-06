@@ -8,7 +8,7 @@
     "lint": "tslint \"src/**/*.ts\" && eslint --plugin eslint-plugin-mocha ./test/backend/**/*-test.js",
     "test": "npm run lint && npm run mocha",
     "mocha": "mocha ./test/backend/*-test.js",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec ./test/backend/*-test.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec ./test/backend/*-test.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor"
