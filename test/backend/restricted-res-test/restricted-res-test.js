@@ -7,11 +7,22 @@ let should = require('should');
 let moment = require('moment');
 let jwt = require('jsonwebtoken');
 
-let s = require('../../../services/restricted-res/restricted-res')
+function generateToken() {
+    var payload = {
+        iss: 'my.domain.com',
+        sub: 'userid:1',
+        iat: moment().unix(),
+        exp: moment().add(7, 'days').unix()
+    };
+    return jwt.sign(payload, 'pluto');
+}
+
+let s = require('../../../services/restricted-res/restricted-res');
+
 describe('API test with authorization', () => {
 
     const not_authorized_error_code = 500;
-    const request_url = "http://localhost:4000";
+    const request_url = "http://localhost:4050";
 
     beforeEach('Populate database',function(done) {
         done();
@@ -21,21 +32,34 @@ describe('API test with authorization', () => {
             done();
     });
 
-    describe('GET /user/v1/learningUnits', () => {
+    describe('GET /user/v1/learningUnits', function() {
+        this.timeout(5000);
 
-        it.only("Can't get anything if not authenticated", (done) => {
+        it("Shouldn't get anything if not authenticated", (done) => {
+
             setTimeout( () => {
                 request(request_url)
                     .get('/api/v1/restricted/getSecret')
-                    .expect(not_authorized_error_code)
-                    .expect(_ => {
-                        Number(1).should.not.be.exactly(1);
+                    .expect(302,done)
+
+            },2000);
+
+
+        });
+
+        it.only("Should get protected resource with correct token", (done) => {
+
+            setTimeout( () => {
+                request(request_url)
+                    .get('/api/v1/restricted/getSecret')
+                    .set('Authorization',`Bearer ${generateToken()}`)
+                    .expect(200)
+                    .expect( res => {
+                        console.log('EVABE');
                     })
-                    .end((err, res) => {
+                    .end( err => {
                         if (err) throw err;
                     });
-
-
             },2000);
 
 

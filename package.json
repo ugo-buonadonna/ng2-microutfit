@@ -29,6 +29,7 @@
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
     "daemonite-material": "^4.0.0-alpha.2",
+    "jsonwebtoken": "^7.1.9",
     "lodash": "^4.16.6",
     "method-override": "^2.3.6",
     "moment": "^2.15.2",

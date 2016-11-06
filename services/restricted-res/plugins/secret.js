@@ -9,7 +9,9 @@
 let restricted_plugin = function (options) {
 
     this.add({role: 'restricted',cmd: 'getSecret', }, (msg, respond) => {
-        console.log();
+        console.log('Il segreto è: ',23);
+        console.log('request:ci deve essere user quindi ', msg.user,msg.args.user);
+
      });
 
  }

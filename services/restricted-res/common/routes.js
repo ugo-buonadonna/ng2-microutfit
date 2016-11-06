@@ -5,9 +5,11 @@ const Routes = [{
     prefix: '/api/v1/restricted',
     pin: 'role:restricted,cmd:*',
     map: {
-        getSecret: {GET: true},
-        secure: {
-            fail: '/'
+        getSecret: {
+            GET: true,
+            secure: {
+                fail: '/'
+            }
         }
     }
 }];
