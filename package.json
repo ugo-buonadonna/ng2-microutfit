@@ -5,7 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "start": "ng serve",
-    "lint": "tslint \"src/**/*.ts\"",
+    "lint": "tslint \"src/**/*.ts\" && eslint --plugin eslint-plugin-mocha ./test/backend/**/*-test.js",
     "test": "npm run lint && npm run mocha",
     "mocha": "mocha ./test/backend/*-test.js",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec ./test/backend/*-test.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
@@ -52,6 +52,7 @@
     "coveralls": "^2.11.14",
     "eslint": "^3.9.1",
     "eslint-config-google": "^0.7.0",
+    "eslint-plugin-mocha": "^4.7.0",
     "istanbul": "^0.4.5",
     "jasmine-core": "2.4.1",
     "jasmine-spec-reporter": "2.5.0",
