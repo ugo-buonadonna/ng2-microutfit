@@ -5,7 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "start": "ng serve",
-    "lint": "tslint \"src/**/*.ts\" && eslint --plugin eslint-plugin-mocha ./test/backend/**/*-test.js",
+    "lint": "tslint \"src/**/*.ts\" && eslint --plugin eslint-plugin-mocha ./test/backend/**/*-test.js && eslint ./services/**/*.js",
     "test": "npm run lint && npm run mocha",
     "mocha": "mocha ./test/backend/*-test.js",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec ./test/backend/*-test.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
@@ -31,6 +31,8 @@
     "daemonite-material": "^4.0.0-alpha.2",
     "lodash": "^4.16.6",
     "method-override": "^2.3.6",
+    "moment": "^2.15.2",
+    "passport-jwt": "^2.2.0",
     "rxjs": "5.0.0-beta.12",
     "seneca": "^3.2.2",
     "seneca-auth": "^1.1.0",
@@ -66,6 +68,7 @@
     "mocha-lcov-reporter": "^1.2.0",
     "protractor": "4.0.9",
     "should": "^11.1.1",
+    "supertest": "^2.0.1",
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
     "typescript": "~2.0.3"
