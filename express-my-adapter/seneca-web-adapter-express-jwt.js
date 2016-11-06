@@ -101,16 +101,20 @@ function securedRoute (seneca, options, context, method, route, auth) {
       }
     };
 
-    if (request.isAuthenticated()) {
-       // ATTACH USER TO REQUEST
-      request.user ={
-        id: '123',
-        name: 'NICULA'
-      }
+    let payload;
+    if (payload = request.isAuthenticated()) {
+      let user_entity = seneca.make('sys/user');
+      console.log('UID: ',payload.sub);
+      user_entity.load$(payload.sub, (err,user) => {
+        if(err) return next(err);
+        console.log("ho trovato sto schifo",user);
+        request.user = user;
+        handleRoute(seneca, options, request, reply, route, next)
+      })
+
     } else {
       return reply.redirect(route.secure.fail)
     }
 
-    handleRoute(seneca, options, request, reply, route, next)
   })
 }

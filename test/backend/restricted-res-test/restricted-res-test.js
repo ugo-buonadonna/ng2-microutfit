@@ -10,7 +10,7 @@ let jwt = require('jsonwebtoken');
 function generateToken() {
     var payload = {
         iss: 'my.domain.com',
-        sub: 'userid:1',
+        sub: '581fb15196f7f53da34f7096',
         iat: moment().unix(),
         exp: moment().add(7, 'days').unix()
     };
@@ -32,7 +32,7 @@ describe('API test with authorization', () => {
             done();
     });
 
-    describe('GET /user/v1/learningUnits', function() {
+    describe('GET /api/v1/restricted/getSecret', function() {
         this.timeout(5000);
 
         it("Shouldn't get anything if not authenticated", (done) => {
@@ -48,7 +48,6 @@ describe('API test with authorization', () => {
         });
 
         it.only("Should get protected resource with correct token", (done) => {
-
             setTimeout( () => {
                 request(request_url)
                     .get('/api/v1/restricted/getSecret')

@@ -49,12 +49,34 @@ var config = {
 
 */
  var seneca = Seneca()
+    .use("basic")
+    .use("entity")
+     .use("user")
+    .use('mongo-store', {
+         uri: 'mongodb://localhost:27017/micro'
+     })
     .use(secretPlugin)
     .use(Web, config)
+
     .ready(() => {
         var server = seneca.export('web/context')();
 
-        server.listen('4050', (err) => {
-            console.log(err || 'server started on: 4050')
+        seneca.ready(function () {
+          /*  seneca.act({
+                    role: 'user',
+                    cmd: 'register',
+                    name: "Flann O'Brien",
+                    email: 'nincompoop@deselby.com',
+                    nick: 'TUTTMAIAL'
+                    password: 'blackair'
+                },
+                function (err, out) {
+                    console.log('ORA UN USER CI STE', out);
+                })*/
+
+
+            server.listen('4050', (err) => {
+                console.log(err || 'server started on: 4050')
+            })
         })
-    });
+    })

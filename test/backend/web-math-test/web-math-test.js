@@ -6,7 +6,7 @@
 const should = require('should');
 
 const seneca = require('seneca')()
-    .use('../../web-math/plugins/math.js');
+    .use('../../services/web-math/plugins/math.js');
 
 
 describe('Math plugin testing', function() {

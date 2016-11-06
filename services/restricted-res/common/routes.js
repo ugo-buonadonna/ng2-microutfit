@@ -1,6 +1,3 @@
-
-// mapping tra azioni e routes
-
 const Routes = [{
     prefix: '/api/v1/restricted',
     pin: 'role:restricted,cmd:*',
@@ -13,6 +10,32 @@ const Routes = [{
         }
     }
 }];
+
+module.exports = Routes;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* const Routes = [{
@@ -35,4 +58,3 @@ const Routes = [{
  DELETE /api/v1/animals/{id} -- delete
  */
 
-module.exports = Routes;
