@@ -36,10 +36,9 @@ var seneca = Seneca()
     .use('basic')
     .use('entity')
     .use('user')
-    .use('seneca-auth', {
+   /* .use('seneca-auth', {
     default_plugins: { authTokenCookie: false }
-    })
-    .use(require('auth-token-header'))
+    })*/
     .use('jwt', {
         key: 'superPassword'
     })
@@ -55,8 +54,8 @@ var seneca = Seneca()
         })
         */
       console.log("ready");
-        this.act({role: 'user', cmd: 'register',nick: 'u1', name: 'nu1', email: 'u1@example.com', password: 'u1', active: true},
-            (err,done) => console.log('here!!',done.user))
+      /*  this.act({role: 'user', cmd: 'register',nick: 'u1', name: 'nu1', email: 'u1@example.com', password: 'u1', active: true},
+            (err,done) => console.log('here!!',done.user))*/
     });
 
 /*

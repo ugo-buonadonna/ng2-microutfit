@@ -19,8 +19,11 @@ let math_plugin = function math(options) {
     },options);
 
     this.add({cmd: "sum", role: "math"}, (msg, respond) => {
-        let left = Number(msg.args.body.left);
-        let right = Number(msg.args.body.right);
+        let left,right;
+        if(msg.args)
+            [left,right] = [Number(msg.args.body.left), Number(msg.args.body.right)];
+        else
+            [left,right] = [msg.left,msg.right];
 
         if(isNaN(left) || isNaN(right))
             respond(null, {status: 'err',answer: 'invalid numbers provided'});

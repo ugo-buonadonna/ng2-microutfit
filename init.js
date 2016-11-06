@@ -109,21 +109,30 @@ var seneca = Seneca()
  const spawn = require('child_process').spawn;
 
 
- const services = ['restricted-res'];
+ const services = ['web-math'];
 
+/*
+ services.map((service) => {
 
- /*services.map((service) => {
- const log  = fs.createWriteStream('./logs/'+service+'.log');
- const proc = spawn('node', ['./'+service+'/'+service+'.js']);
+     fs.mkdir('./logs',(err) => {
+         if(err.code !== 'EEXIST')
+             throw err;
 
-     log.on('open', _ => {
-         proc.stdout.pipe(log);
-         proc.stderr.pipe(log);
+         const log  = fs.createWriteStream('./logs/'+service+'.log');
 
-         proc.stdout.pipe(process.stdout);
-         proc.stderr.pipe(process.stderr);
-     })
- });*/
+         const proc = spawn('node', ['./'+service+'/'+service+'.js']);
+
+         log.on('open', _ => {
+             proc.stdout.pipe(log);
+             proc.stderr.pipe(log);
+
+             proc.stdout.pipe(process.stdout);
+             proc.stderr.pipe(process.stderr);
+         })
+     });
+
+ });
+ */
 
 module.exports = (x,y) => x+y;
 
