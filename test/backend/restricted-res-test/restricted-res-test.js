@@ -17,7 +17,8 @@ function generateToken() {
     return jwt.sign(payload, 'pluto');
 }
 
-let s = require('../../../services/restricted-res/restricted-res');
+let s = require('../../../services/outfit-res/outfit-res');
+
 
 describe('API test with authorization', () => {
 
@@ -25,6 +26,7 @@ describe('API test with authorization', () => {
     const request_url = "http://localhost:4050";
 
     beforeEach('Populate database',function(done) {
+
         done();
     });
 
@@ -33,7 +35,7 @@ describe('API test with authorization', () => {
     });
 
     describe('GET /api/v1/restricted/getSecret', function() {
-        this.timeout(5000);
+        this.timeout(8000);
 
         it("Shouldn't get anything if not authenticated", (done) => {
 
@@ -47,7 +49,7 @@ describe('API test with authorization', () => {
 
         });
 
-        it.only("Should get protected resource with correct token", (done) => {
+        it("Should get protected resource with correct token", function(done) {
             setTimeout( () => {
                 request(request_url)
                     .get('/api/v1/restricted/getSecret')
@@ -60,9 +62,27 @@ describe('API test with authorization', () => {
                         if (err) throw err;
                     });
             },2000);
-
-
         });
+        it.only("should create a new outfit", function(done) {
+            setTimeout( () => {
+
+
+                    request(request_url)
+                        .post('/api/v1/outfit/create')
+                        .set('Authorization',`Bearer ${generateToken()}`)
+                        .send({ name: 'Manny', species: 'cat' })
+                        .expect(200)
+                        .expect( res => {
+                            console.log('ma prova', res);
+                            done();
+                        })
+                        .end( err => {
+                            if (err) throw err;
+                        });
+
+            },2000);
+            })
+
 
 
     });

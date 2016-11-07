@@ -1,9 +1,9 @@
 const Routes = [{
-    prefix: '/api/v1/restricted',
-    pin: 'role:restricted,cmd:*',
+    prefix: '/api/v1/outfit',
+    pin: 'role:outfit,cmd:*',
     map: {
-        getSecret: {
-            GET: true,
+        create: {
+            POST: true,
             secure: {
                 fail: '/'
             }

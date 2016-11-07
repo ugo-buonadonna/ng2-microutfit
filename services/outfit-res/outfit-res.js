@@ -23,7 +23,8 @@ var config = {
     context: app,
     routes: Routes,
     options: {
-        secret: 'pluto'
+        secret: 'pluto',
+        parseBody: false
     },
     auth: jwt
 };
@@ -51,7 +52,7 @@ var config = {
  var seneca = Seneca()
     .use("basic")
     .use("entity")
-     .use("user")
+    .use("user")
     .use('mongo-store', {
          uri: 'mongodb://localhost:27017/micro'
      })

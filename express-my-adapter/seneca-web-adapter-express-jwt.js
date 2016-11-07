@@ -26,7 +26,7 @@ module.exports = function express (options, context, auth, routes, done) {
       if (!route.secure) {
         unsecuredRoute(seneca, options, context, method, route)
       }
-      else {
+      else if(route.secure) {
         securedRoute(seneca, options, context, method, route, auth)
       }
     })
@@ -91,6 +91,7 @@ function unsecuredRoute (seneca, options, context, method, route) {
 //Secured route checks for token existance. If the token is correctly verified, the resouce can be
 //Returned. Auth must be a jsonwebtoken instance
 function securedRoute (seneca, options, context, method, route, auth) {
+  console.log(method,' on ', route.path);
   context[method](route.path, (request, reply, next) => {
     request.isAuthenticated = function () {
       var token = (request.headers.authorization && request.headers.authorization.split(' ')[1]) || request.cookies.token;
@@ -104,10 +105,8 @@ function securedRoute (seneca, options, context, method, route, auth) {
     let payload;
     if (payload = request.isAuthenticated()) {
       let user_entity = seneca.make('sys/user');
-      console.log('UID: ',payload.sub);
       user_entity.load$(payload.sub, (err,user) => {
         if(err) return next(err);
-        console.log("ho trovato sto schifo",user);
         request.user = user;
         handleRoute(seneca, options, request, reply, route, next)
       })
