@@ -6,36 +6,40 @@ const Routes = [{
             POST: true,
             secure: {
                 fail: '/'
+            },
+        },
+        read: {
+            GET: true,
+            suffix: '/{id}',
+            secure: {
+                fail: '/',
+            }
+        },
+        list: {
+            GET: true,
+            secure: {
+                fail: '/',
+            }
+        },
+        update: {
+            POST: true,
+            suffix: '/{id}',
+            secure: {
+                fail: '/'
+            }
+        },
+        delete: {
+            DELETE: true,
+            suffix: '/{id}',
+            secure: {
+                fail: '/'
             }
         }
     }
-}];
+}]
+
 
 module.exports = Routes;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* const Routes = [{

@@ -9,13 +9,16 @@ var BodyParser = require('body-parser');
 var methodOverride = require('method-override');
 const Routes = require('./common/routes');
 const secretPlugin = require('./plugins/secret');
+const expressValidator = require('express-validator')
 
 // Prep express
 var app = Express();
 app.use(CookieParser());
-app.use(BodyParser.urlencoded({extended: true}));
+
 app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(BodyParser.urlencoded({extended: true}));
 app.use(BodyParser.json());
+app.use(expressValidator());
 
 // The config we will pass to seneca-web
 var config = {

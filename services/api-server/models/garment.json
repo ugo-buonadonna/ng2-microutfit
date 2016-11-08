@@ -1,0 +1,33 @@
+{
+  "name": "garment",
+  "plural": "garments",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": "true"
+    },
+    "type": {
+      "type": "string"
+    },
+    "imageURL": {
+      "type": "string"
+    },
+    "whereToBuy": {
+      "type": "object"
+    },
+    "attributes": {
+      "type": [
+        "any"
+      ]
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

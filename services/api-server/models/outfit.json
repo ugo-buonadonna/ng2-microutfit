@@ -1,0 +1,44 @@
+{
+  "name": "outfit",
+  "plural": "outfits",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "season": {
+      "type": "string"
+    },
+    "year": {
+      "type": "number"
+    },
+    "clothes": {
+      "type": [
+        "object"
+      ]
+    },
+    "imageURL": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "garments": {
+      "type": "hasAndBelongsToMany",
+      "model": "garment",
+      "foreignKey": ""
+    },
+    "people": {
+      "type": "hasAndBelongsToMany",
+      "model": "person",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,51 @@
+{
+  "name": "person",
+  "plural": "people",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "age": {
+      "type": "number"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "height": {
+      "type": "number"
+    },
+    "weight": {
+      "type": "number"
+    },
+    "measures": {
+      "type": "object"
+    },
+    "bodyType": {
+      "type": [
+        "string"
+      ]
+    },
+    "occupation": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "outfits": {
+      "type": "hasMany",
+      "model": "outfit",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
