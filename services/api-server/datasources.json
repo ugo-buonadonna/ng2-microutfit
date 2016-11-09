@@ -12,7 +12,7 @@
     "connector": "mongodb"
   },
   "mongodb_staging": {
-    "host": "127.0.0.1",
+    "host": "localhost",
     "port": 27017,
     "database": "stagingDB",
     "username": "",
