@@ -3,7 +3,6 @@ import {Http} from '@angular/http';
 import { Outfit } from './models/outfit.model';
 import { OnInit } from '@angular/core';
 import { BoardService} from './board-service/board.service';
-import {AppState} from './reducers/rootReducer';
 import {AppStore} from './store/appStore';
 import {getOutfits} from './reducers/outfitReducer';
 // import {Store} from "redux";

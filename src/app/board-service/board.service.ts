@@ -1,7 +1,6 @@
 import {Injectable, Inject}     from '@angular/core';
 import {RequestOptions, Headers, Response, Http} from '@angular/http';
 import {AppStore} from '../store/appStore';
-import {AppState} from '../reducers/rootReducer';
 import * as OutfitActions from '../actions/OutfitActions';
 import {Outfit} from '../models/outfit.model';
 
