@@ -1,7 +1,6 @@
 /**
  * Created by ugo on 03/11/16.
  */
-
 /*
  let seneca = require('seneca')();
 
@@ -9,23 +8,17 @@
  .use('./app/main')
  .listen()
  .client()
-
  .ready( () => {
- seneca.act('role:math, cmd:sum', {left: 1, right: 3}, (err,reply) => console.log(reply))
+ seneca.act('role:math, cmd:sum', {left: 1, right: 3},
+ (err,reply) => console.log(reply))
  });
-
  */
 
-/*
- "use strict";
-
-
- // use the http://expressjs.com web framework
+/* "use strict"; // use the http://expressjs.com web framework
  const express        = require('express');
  const bodyParser     = require('body-parser');
  const cookieParser   = require('cookie-parser');
  const methodOverride = require('method-override');
-
 
  // setup the configuration
  const conf = {
@@ -39,9 +32,6 @@
  // use the example plugins
  // they are all sub folders
  seneca.use('./app/main');
-
-
-
 
  // set up express
  const app = express();
@@ -66,76 +56,112 @@
 
  */
 /*
-'use strict';
+ 'use strict';
 
-var Seneca = require('seneca');
-var Web = require('seneca-web');
-var Express = require('express');
-var CookieParser = require('cookie-parser');
-var BodyParser = require('body-parser');
+ var Seneca = require('seneca');
+ var Web = require('seneca-web');
+ var Express = require('express');
+ var CookieParser = require('cookie-parser');
+ var BodyParser = require('body-parser');
 
-var Plugin = require('./app/main');
-const Routes = require('./app/routes');
+ var Plugin = require('./app/main');
+ const Routes = require('./app/routes');
 
-// Prep express
-var app = Express();
+ // Prep express
+ var app = Express();
 
-app.use(CookieParser());
-app.use(BodyParser.urlencoded({extended: true}));
+ app.use(CookieParser());
+ app.use(BodyParser.urlencoded({extended: true}));
 
-// The config we will pass to seneca-web
-var config = {
-    adapter: require('seneca-web-adapter-express'),
-    context: app,
-    routes: Routes
-};
+ // The config we will pass to seneca-web
+ var config = {
+ adapter: require('seneca-web-adapter-express'),
+ context: app,
+ routes: Routes
+ };
 
-// Server and start as usual.
+ // Server and start as usual.
 
-var seneca = Seneca()
-    .use(Plugin)
-    .use(Web, config)
-    .ready(() => {
-        var server = seneca.export('web/context')();
+ var seneca = Seneca()
+ .use(Plugin)
+ .use(Web, config)
+ .ready(() => {
+ var server = seneca.export('web/context')();
 
-        server.listen('4000', (err) => {
-            console.log(err || 'server started on: 4000')
-        })
-    });*/
+ server.listen('4000', (err) => {
+ console.log(err || 'server started on: 4000')
+ })
+ });*/
 
-
-'use strict';
+/*
+ 'use strict';
  const fs = require('fs');
  const spawn = require('child_process').spawn;
 
 
  const services = ['web-math'];
 
-/*
+
  services.map((service) => {
 
-     fs.mkdir('./logs',(err) => {
-         if(err.code !== 'EEXIST')
-             throw err;
+ fs.mkdir('./logs',(err) => {
+ if(err.code !== 'EEXIST')
+ throw err;
 
-         const log  = fs.createWriteStream('./logs/'+service+'.log');
+ const log  = fs.createWriteStream('./logs/'+service+'.log');
 
-         const proc = spawn('node', ['./'+service+'/'+service+'.js']);
+ const proc = spawn('node', ['./'+service+'/'+service+'.js']);
 
-         log.on('open', _ => {
-             proc.stdout.pipe(log);
-             proc.stderr.pipe(log);
+ log.on('open', _ => {
+ proc.stdout.pipe(log);
+ proc.stderr.pipe(log);
 
-             proc.stdout.pipe(process.stdout);
-             proc.stderr.pipe(process.stderr);
-         })
-     });
+ proc.stdout.pipe(process.stdout);
+ proc.stderr.pipe(process.stderr);
+ })
+ });
 
  });
  */
+'use strict';
 
-module.exports = (x,y) => x+y;
+const server = require('./services/api-server/api-server');
+const faker = require('faker');
 
+const Outfit = server.models.Outfit;
+let pendings = [];
+
+module.exports = (x, y) => x+y;
+
+Outfit.create([
+    {
+        season: 'summer',
+        year: 2016,
+        name: 'Il furbo',
+        imageURL: 'assets/outfit1.jpg',
+        public: true
+    },
+    {
+        season: 'winter',
+        year: 2016,
+        name: 'Il modaiolo',
+        imageURL: 'assets/outfit2.jpg',
+        public: true
+    },
+    {
+        season: 'spring',
+        year: 2016,
+        name: 'Zante',
+        imageURL: 'assets/outfit3.jpg',
+        public: true
+    }
+])
+.then( (outfits) => {
+    outfits.map( o => {
+        for (let i of Array(3))
+            pendings.push(o.garments.create({name: faker.lorem.word()+i}));
+    });
+});
 
 
 /*

@@ -4,14 +4,29 @@ import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-
 import { AppComponent } from './app.component';
 import { BodyRendererComponent } from './body-renderer/body-renderer.component';
 import { ClotheItemRendererComponent } from './clothe-item-renderer/clothe-item-renderer.component';
 import { ClotheDetailComponent } from './clothe-detail/clothe-detail.component';
 import { OutfitContainerComponent } from './outfit-container/outfit-container.component';
-import {BoardService} from './board-service/board.service';
 import { FormComponentComponent } from './form-component/form-component.component';
+
+import {AppState, default as reducer} from './reducers/rootReducer';
+import {Store, StoreEnhancer, compose, createStore}  from 'redux';
+import {AppStore} from './store/appStore';
+import {BoardService} from './board-service/board.service';
+
+
+let devtools: StoreEnhancer<AppState> =
+    window['devToolsExtension'] ?
+        window['devToolsExtension']() : f => f;
+
+
+let store: Store<AppState> = createStore<AppState>(
+    reducer,
+    compose(devtools)
+);
+
 
 
 @NgModule({
@@ -31,7 +46,12 @@ import { FormComponentComponent } from './form-component/form-component.componen
     JsonpModule,
     ReactiveFormsModule
   ],
-  providers: [BoardService],
+  providers: [BoardService,
+      { provide: AppStore, useFactory: () => store }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}
+
+

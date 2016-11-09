@@ -1,43 +1,27 @@
-import {Injectable}     from '@angular/core';
-import {RequestOptions, Headers} from '@angular/http';
-import {Outfit}         from '../outfit-model/outfit.model';
+import {Injectable, Inject}     from '@angular/core';
+import {RequestOptions, Headers, Response, Http} from '@angular/http';
+import {AppStore} from '../store/appStore';
+import {AppState} from '../reducers/rootReducer';
+import * as OutfitActions from '../actions/OutfitActions';
+import {Outfit} from '../models/outfit.model';
 
 @Injectable()
 export class BoardService {
     // URL to web API
 
-  constructor() {
+  constructor(public http: Http, @Inject(AppStore) private store: any ) {
   }
 
-  getBoard(): any {
+  getBoard(): void {
     let headers: Headers = new Headers();
     headers.append('X-API-TOKEN', 'ng-book');
     let opts: RequestOptions = new RequestOptions();
     opts.headers = headers;
-
-    return Promise.resolve([
-      new Outfit({
-        season: 'summer',
-        year: 2016,
-        clothes: Array(3).fill('hat'),
-        name: 'Il furbo',
-        imageURL: 'assets/outfit1.jpg'
-      }),
-      new Outfit({
-        season: 'winter',
-        year: 2016,
-        clothes: Array(3).fill('capo'),
-        name: 'Il modaiolo',
-        imageURL: 'assets/outfit2.jpg'
-      }),
-      new Outfit({
-        season: 'spring',
-        year: 2016,
-        clothes: Array(3).fill('capo'),
-        name: 'Zante',
-        imageURL: 'assets/outfit3.jpg'
-      })
-    ]);
+      this.http.request('http://localhost:3000/api/outfits/public')
+          .subscribe((res: Response) => {
+              let outfits: Outfit[] = res.json().outfits;
+              outfits.map( o => this.store.dispatch(OutfitActions.addOutfit(o)));
+          });
   }
 
 }

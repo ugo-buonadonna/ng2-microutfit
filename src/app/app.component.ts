@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Http} from '@angular/http';
-import { Outfit } from './outfit-model/outfit.model';
+import { Outfit } from './models/outfit.model';
 import { OnInit } from '@angular/core';
 import { BoardService} from './board-service/board.service';
-let XML2json = require('./xml2json.min.js');
+import {AppState} from './reducers/rootReducer';
+import {AppStore} from './store/appStore';
+import {getOutfits} from './reducers/outfitReducer';
+// import {Store} from "redux";
+
 
 
 @Component({
@@ -14,31 +18,33 @@ let XML2json = require('./xml2json.min.js');
 export class AppComponent implements OnInit {
   data: Object;
   outfits: Outfit[];
-  x2js: any;
   board: any;
   requestFired: boolean;
 
-  constructor(public http: Http, private boardService: BoardService) {
+  constructor(public http: Http, private boardService: BoardService, @Inject(AppStore) private store: any) {
+      store.subscribe(() => this.updateState() );
     this.requestFired = false;
-  this.x2js = new XML2json();
   };
 
+    updateState() {
+        let state = this.store.getState();
+        this.outfits = getOutfits(state);
+    }
+
   getBoard() {
-    this.boardService.getBoard().then( res => this.outfits = res);
+    this.boardService.getBoard();
   }
 
   ngOnInit(): void {
   }
 
   makeRequest(): void {
-    this.requestFired = true;
     this.getBoard();
+    this.requestFired = true;
   }
 
 
 }
-
-
 
 // Qua devo creare 1 outfit
 // Gli outfit li prenderò da un database

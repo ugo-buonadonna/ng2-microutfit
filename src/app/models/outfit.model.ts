@@ -6,13 +6,13 @@ type Season = 'winter' | 'spring' | 'summer' | 'autumn';
 
 export class Outfit {
   name: string;
-  season: Season;
-  year: number;
-  clothes: any[];
-  imageURL: string;
+  season?: Season;
+  year?: number;
+  garments?: any[];
+  imageURL?: string;
 
-  constructor(outfit: Outfit) {
-    ({name: this.name , season: this.season, year: this.year, clothes: this.clothes, imageURL: this.imageURL} = outfit);
+  constructor(outfit: any) {
+    ({name: this.name , season: this.season, year: this.year, garments: this.garments, imageURL: this.imageURL} = outfit);
   }
 
   toString() {

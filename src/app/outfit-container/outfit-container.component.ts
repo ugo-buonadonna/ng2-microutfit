@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Outfit} from '../outfit-model/outfit.model';
+import {Outfit} from '../models/outfit.model';
 
 @Component({
   selector: 'app-outfit-container',
