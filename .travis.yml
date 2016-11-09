@@ -1,6 +1,8 @@
 language: node_js
 sudo: false
 os: linux
+services:
+  mongodb
 git:
   depth: 3
 node_js:
