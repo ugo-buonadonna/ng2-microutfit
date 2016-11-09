@@ -14,34 +14,34 @@
     ]
   },
   "User": {
-    "dataSource": "mongodb_dev"
+    "dataSource": "mongodb"
   },
   "AccessToken": {
-    "dataSource": "mongodb_dev",
+    "dataSource": "mongodb",
     "public": false
   },
   "ACL": {
-    "dataSource": "mongodb_dev",
+    "dataSource": "mongodb",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "mongodb_dev",
+    "dataSource": "mongodb",
     "public": false
   },
   "Role": {
-    "dataSource": "mongodb_dev",
+    "dataSource": "mongodb",
     "public": false
   },
   "outfit": {
-    "dataSource": "mongodb_dev",
+    "dataSource": "mongodb",
     "public": true
   },
   "garment": {
-    "dataSource": "mongodb_dev",
+    "dataSource": "mongodb",
     "public": true
   },
   "person": {
-    "dataSource": "mongodb_dev",
+    "dataSource": "mongodb",
     "public": true
   }
 }

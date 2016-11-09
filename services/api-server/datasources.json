@@ -3,7 +3,8 @@
     "name": "db",
     "connector": "memory"
   },
-  "mongodb_dev": {
+
+  "mongodb": {
     "host": "localhost",
     "database": "devDB",
     "username": "",

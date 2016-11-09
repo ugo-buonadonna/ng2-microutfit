@@ -1,0 +1,9 @@
+{
+  "mongodb": {
+    "host": "localhost",
+    "database": "testDB",
+    "username": "",
+    "password": "",
+    "connector": "mongodb"
+  }
+}
