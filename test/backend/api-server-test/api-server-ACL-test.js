@@ -71,7 +71,7 @@ describe('API tests', function () {
                     .expect(401, done);
             });
 
-            it.only("should get user's own outfit list", function (done) {
+            it("should get user's own outfit list", function (done) {
                 request
                     .get(`/api/people/test-user1/outfits`)
                     .set('Authorization', accessToken1)
@@ -97,26 +97,36 @@ describe('API tests', function () {
         describe('unauthenticated user', function () {
             it("should get all public outfits", function (done) {
                 request
-                    .get(`/api/outfits/`)
-                    .expect(200, done);
+                    .get(`/api/outfits/public`)
+                    .expect(200)
+                    .expect( res => {
+                        res.body.outfits.length.should.be.exactly(1);
+                        res.body.outfits[0].id.should.eql('test-outfitpublic');
+                    })
+                    .end(done);
             });
-        })
+
+        });
 
         describe('authenticated user', function () {
             it("should get all public outfits", function (done) {
                 request
-                    .get(`/api/outfits/`)
+                    .get(`/api/outfits/public`)
                     .set('Authorization', accessToken1)
-                    .expect(200, done);
+                    .expect( res => {
+                        res.body.outfits.length.should.be.exactly(1);
+                        res.body.outfits[0].id.should.eql('test-outfitpublic');
+                    })
+                    .end(done);
             });
-            it("should get user's own outfit by ID", function (done) {
+            it.skip("should get user's own outfit by ID", function (done) {
                 request
                     .get(`/api/outfits/test-outfit1`)
                     .set('Authorization', accessToken1)
                     .expect(200, done);
             });
 
-            it("should get user's own outfit's garments", function (done) {
+            it.skip("should get user's own outfit's garments", function (done) {
                 request
                     .get(`/api/outfits/test-outfit1/garments`)
                     .set('Authorization', accessToken1)
@@ -144,14 +154,14 @@ describe('API tests', function () {
     describe('GET /api/garment', function () {
 
         describe('authenticated user', function () {
-            it("should get user's own garment by outfit", function (done) {
+            it.skip("should get user's own garment by outfit", function (done) {
                 request
                     .get(`/api/garments/test-garment1`)
                     .set('Authorization', accessToken1)
                     .expect(200, done);
             });
 
-            it("should get user's own outfit by ID having a given garment", function (done) {
+            it.skip("should get user's own outfit by ID having a given garment", function (done) {
                 request
                     .get(`/api/garments/test-outfit1`)
                     .set('Authorization', accessToken1)
