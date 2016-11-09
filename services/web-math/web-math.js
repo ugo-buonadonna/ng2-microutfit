@@ -3,39 +3,39 @@
  */
 'use strict';
 
-var Seneca = require('seneca');
-var Web = require('seneca-web');
-var Express = require('express');
-var CookieParser = require('cookie-parser');
-var BodyParser = require('body-parser');
+let seneca = require('seneca');
+let express = require('express');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
 
-var Plugin = require('./plugins/math');
 const Routes = require('./common/routes');
 
 // Prep express
-var app = Express();
+let app = express();
 
-app.use(CookieParser());
-app.use(BodyParser.urlencoded({extended: true}));
-app.use(BodyParser.json());
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
-// The config we will pass to seneca-web
-var config = {
+// The config we will pass to senenpm runca-web
+let config = {
     adapter: require('seneca-web-adapter-express'),
     context: app,
     routes: Routes,
-    options: { parseBody: false }
+    options: {
+        parseBody: false
+    }
 };
 
 // Server and start as usual.
 
-var seneca = Seneca()
+seneca = seneca()
     .use(Plugin)
     .use(Web, config)
     .ready(() => {
-        var server = seneca.export('web/context')();
+        let server = seneca.export('web/context')();
 
         server.listen('4000', (err) => {
-            console.log(err || 'server started on: 4000')
-        })
+            console.log(err || 'server started on: 4000');
+        });
     });

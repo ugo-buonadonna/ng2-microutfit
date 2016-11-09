@@ -9,6 +9,8 @@ module.exports = {
         "node": true
     },
     "rules": {
-        "mocha/no-exclusive-tests": "error"
+        "mocha/no-exclusive-tests": "error",
+        "arrow-parens": 0,
+        "comma-dangle": 1
     }
 }

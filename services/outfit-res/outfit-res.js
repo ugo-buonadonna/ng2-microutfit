@@ -1,19 +1,19 @@
 'use strict';
 
-var Seneca = require('seneca');
-var Web = require('seneca-web');
-var Express = require('express');
+let seneca = require('seneca');
+let Web = require('seneca-web');
+let express = require('express');
 const jwt = require('jsonwebtoken');
-var CookieParser = require('cookie-parser');
-var BodyParser = require('body-parser');
-var methodOverride = require('method-override');
+let cookieParser = require('cookie-parser');
+let BodyParser = require('body-parser');
+let methodOverride = require('method-override');
 const Routes = require('./common/routes');
 const secretPlugin = require('./plugins/secret');
-const expressValidator = require('express-validator')
+const expressValidator = require('express-validator');
 
 // Prep express
-var app = Express();
-app.use(CookieParser());
+let app = express();
+app.use(cookieParser());
 
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(BodyParser.urlencoded({extended: true}));
@@ -21,7 +21,7 @@ app.use(BodyParser.json());
 app.use(expressValidator());
 
 // The config we will pass to seneca-web
-var config = {
+let config = {
     adapter: require('../../express-my-adapter/seneca-web-adapter-express-jwt'),
     context: app,
     routes: Routes,
@@ -52,10 +52,10 @@ var config = {
  }))
 
 */
- var seneca = Seneca()
-    .use("basic")
-    .use("entity")
-    .use("user")
+ let seneca = seneca()
+    .use(`basic`)
+    .use(`entity`)
+    .use(`user`)
     .use('mongo-store', {
          uri: 'mongodb://localhost:27017/micro'
      })
@@ -63,13 +63,13 @@ var config = {
     .use(Web, config)
 
     .ready(() => {
-        var server = seneca.export('web/context')();
+        let server = seneca.export('web/context')();
 
-        seneca.ready(function () {
+        seneca.ready(function() {
           /*  seneca.act({
                     role: 'user',
                     cmd: 'register',
-                    name: "Flann O'Brien",
+                    name: `Flann O'Brien`,
                     email: 'nincompoop@deselby.com',
                     nick: 'TUTTMAIAL'
                     password: 'blackair'
@@ -80,7 +80,7 @@ var config = {
 
 
             server.listen('4050', (err) => {
-                console.log(err || 'server started on: 4050')
-            })
-        })
-    })
+                console.log(err || 'server started on: 4050');
+            });
+        });
+    });
