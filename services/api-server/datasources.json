@@ -3,12 +3,12 @@
     "name": "db",
     "connector": "memory"
   },
-
   "mongodb": {
     "host": "localhost",
     "database": "devDB",
     "username": "",
     "password": "",
+    "name": "mongodb",
     "connector": "mongodb"
   },
   "mongodb_staging": {

@@ -24,18 +24,21 @@
     },
     "imageURL": {
       "type": "string"
+    },
+    "public": {
+      "type": "boolean"
     }
   },
   "validations": [],
   "relations": {
-    "garments": {
-      "type": "hasAndBelongsToMany",
-      "model": "garment",
-      "foreignKey": ""
-    },
     "people": {
       "type": "hasAndBelongsToMany",
       "model": "person",
+      "foreignKey": ""
+    },
+    "garments": {
+      "type": "hasAndBelongsToMany",
+      "model": "garment",
       "foreignKey": ""
     }
   },
@@ -43,15 +46,42 @@
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW"
+      "principalId": "$everyone",
+      "permission": "DENY"
     },
     {
       "accessType": "*",
       "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
+      "permission": "ALLOW",
+      "property": "public"
     }
   ],
-  "methods": {}
+  "methods": {
+    "public": {
+      "isStatic": true,
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "outfits",
+          "type": "array",
+          "root": false,
+          "description": "All public outfits"
+        }
+      ],
+      "description": "Retrieves all public available outfits",
+      "http": [
+        {
+          "path": "/public",
+          "verb": "get"
+        }
+      ]
+    }
+  }
 }
